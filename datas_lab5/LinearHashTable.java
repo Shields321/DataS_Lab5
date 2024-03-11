@@ -18,7 +18,7 @@ public class LinearHashTable {
         machine = new Machine[maxSize];       
     }
 
-    private int trimToPowerOf2(int startingSize) {       
+    public int trimToPowerOf2(int startingSize) {       
         int capacity = 1;
         while (capacity < startingSize) {
             capacity <<= 1;
@@ -47,7 +47,7 @@ public class LinearHashTable {
         return 0;
     }
 
-    private int hashFunction(String key) {
+    public int hashFunction(String key) {
         int hash = 0;
         // Iterate over each character in the string
         for (int i = 0; i < key.length(); i++) {
@@ -58,7 +58,7 @@ public class LinearHashTable {
         return hash % maxSize;
     }
 
-    private int getLocation(String key) {
+    public int getLocation(String key) {
         try{
             int hashCode = hashFunction(key);
             int pos = hashCode % maxSize;
@@ -90,6 +90,7 @@ public class LinearHashTable {
             machine[loc] = null;
             return true;
         } catch (Exception e) {
+            System.out.println("No Value with the key: " + key);
             return false;   
         }
     }
