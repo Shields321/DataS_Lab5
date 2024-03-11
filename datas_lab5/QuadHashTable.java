@@ -1,10 +1,10 @@
-package DataS_Lab5;
+package datas_lab5;
 
 public class QuadHashTable {
     private final static int MAXIMUM_CAPACITY = 1 << 30;
     private int maxSize;
     private Double loadFactor;
-    Machine noIndexMachine = new Machine("no index", "no index", "no index");
+    private Machine noIndexMachine = new Machine("no index", "no index", "no index");
     Machine[] machine;
     int numItems;
     int index = 0;
@@ -43,7 +43,8 @@ public class QuadHashTable {
 
             return pos;
         } catch (Exception e) {
-            maxSize = trimToPowerOf2(maxSize);
+            //System.out.println("Error: " + e); // only un comment if you want to see what error happened
+            System.out.println("Amount of spaces full please try again later (end Program)");
         }
         return 0;
     }
@@ -60,17 +61,23 @@ public class QuadHashTable {
     }
 
     public int getLocation(String key) {
-        int hashCode = hashFunction(key);
-        int pos = hashCode % maxSize;
-        if (machine[pos] == null) {
+        try{
+            int hashCode = hashFunction(key);
+            int pos = hashCode % maxSize;
+            if (machine[pos] == null) {
+                return -1;
+            }
+            while (!(machine[pos].getMachineCode().equals(key))) {
+                pos = (pos + 1) % maxSize;
+            }
+            return pos;
+        }catch(Exception e){
+            //System.out.println("Error: " + e); // only un comment if you want to see what error happened
+            System.out.println("Key Not in Machine List");
             return -1;
-        }
-        while (machine[pos].getMachineCode().equals(key)) {
-            pos = (pos + 1) % maxSize;
-        }
-        return pos;
+        } 
     }
-
+    
     public Machine retrieve(String key) {
         int pos = getLocation(key);
         if (pos == -1) {
@@ -85,7 +92,8 @@ public class QuadHashTable {
             machine[loc] = null;
             return true;
         } catch (Exception e) {
-            return false;
+            System.out.println("No Value with the key: " + key);
+            return false;   
         }
     }
 
