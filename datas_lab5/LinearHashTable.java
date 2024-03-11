@@ -47,7 +47,7 @@ public class LinearHashTable {
         return 0;
     }
 
-    public int hashFunction(String key) {
+    private int hashFunction(String key) {
         int hash = 0;
         // Iterate over each character in the string
         for (int i = 0; i < key.length(); i++) {
@@ -58,7 +58,7 @@ public class LinearHashTable {
         return hash % maxSize;
     }
 
-    public int getLocation(String key) {
+    private int getLocation(String key) {
         try{
             int hashCode = hashFunction(key);
             int pos = hashCode % maxSize;
@@ -76,7 +76,6 @@ public class LinearHashTable {
         } 
     }
     
-
     public Machine retrieve(String key) {
         int pos = getLocation(key);
         if (pos == -1) {
