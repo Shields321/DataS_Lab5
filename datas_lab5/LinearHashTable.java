@@ -6,6 +6,7 @@ public class LinearHashTable {
     private Double loadFactor;
     private Machine noIndexMachine = new Machine("no index", "no index", "no index");
     Machine[] machine;
+    private int addDelete;
     int numItems;
     int index = 0;
 
@@ -16,6 +17,7 @@ public class LinearHashTable {
     }
 
     public int add(Machine m) {
+        addDelete = 2;
         double loadFactor = (1.0*numItems)/maxSize;
         if(loadFactor < this.loadFactor){
             String code = m.getMachineCode();
@@ -49,23 +51,7 @@ public class LinearHashTable {
     public int getLocation(String key) {
         try{
             int hashCode = hashFunction(key);
-            int pos = hashCode % maxSize;   
-            while (!(machine[pos].getMachineCode().equals(key))) {
-                pos = (pos + 1) % maxSize;
-            }                        
-            return pos;
-        }catch(Exception e){    
-            
-            //System.out.println("Error: " + j); // only un comment if you want to see what error happened
-            System.out.println("\nKey Not in Machine List");
-            return -1;
-            
-        } 
-    }
-    public int getDeleteLocation(String key) {
-        try{
-            int hashCode = hashFunction(key);
-            int pos = hashCode % maxSize;   
+            int pos = hashCode % maxSize;  
             if(machine[pos] == null){
                 while(machine[pos] == null){
                     pos++;
@@ -82,7 +68,7 @@ public class LinearHashTable {
             return -1;
             
         } 
-    }
+    }    
     
     public Machine retrieve(String key) {
         int pos = getLocation(key);
@@ -94,7 +80,7 @@ public class LinearHashTable {
 
     public boolean delete(String key) {
         try {
-            int loc = getDeleteLocation(key);                
+            int loc = getLocation(key);                
             machine[loc] = null;
             System.out.println("Value deleted at index:"+ loc);
             return true;
