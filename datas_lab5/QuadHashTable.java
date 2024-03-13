@@ -10,21 +10,9 @@ public class QuadHashTable {
     int index = 0;
 
     public QuadHashTable(int max, double loadFactor) {
-        if (max > MAXIMUM_CAPACITY) {
-            this.maxSize = MAXIMUM_CAPACITY;
-        } else
-            this.maxSize = trimToPowerOf2(max);
+        this.maxSize = max;
         this.loadFactor = loadFactor;
-        machine = new Machine[maxSize];
-    }
-
-    private int trimToPowerOf2(int startingSize) {
-
-        int capacity = 1;
-        while (capacity < startingSize) {
-            capacity <<= 1;
-        }
-        return capacity;
+        machine = new Machine[maxSize]; 
     }
 
     public int add(Machine m) {
@@ -62,13 +50,16 @@ public class QuadHashTable {
 
     public int getLocation(String key) {
         try{
+            int steps =1;
             int hashCode = hashFunction(key);
             int pos = hashCode % maxSize;
-            if (machine[pos] == null) {
-                return -1;
+            if(machine[pos] == null){
+                while(machine[pos] == null){
+                    pos++;
+                }
             }
             while (!(machine[pos].getMachineCode().equals(key))) {
-                pos = (pos + 1) % maxSize;
+                pos = (pos + steps*steps) % maxSize;
             }
             return pos;
         }catch(Exception e){
