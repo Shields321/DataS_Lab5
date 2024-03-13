@@ -1,12 +1,10 @@
 package datas_lab5;
 
 public class LinearHashTable {
-    private final static int MAXIMUM_CAPACITY = 1 << 30;
     private int maxSize;
     private Double loadFactor;
     private Machine noIndexMachine = new Machine("no index", "no index", "no index");
     Machine[] machine;
-    private int addDelete;
     int numItems;
     int index = 0;
 
@@ -17,7 +15,6 @@ public class LinearHashTable {
     }
 
     public int add(Machine m) {
-        addDelete = 2;
         double loadFactor = (1.0*numItems)/maxSize;
         if(loadFactor < this.loadFactor){
             String code = m.getMachineCode();
