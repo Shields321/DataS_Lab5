@@ -1,4 +1,4 @@
-package DataS_Lab5;
+package datas_lab5;
 
 public class DoubleHashTable {
     private int maxSize;
