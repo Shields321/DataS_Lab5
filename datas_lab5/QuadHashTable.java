@@ -1,13 +1,12 @@
 package datas_lab5;
 
 public class QuadHashTable {
-    private final static int MAXIMUM_CAPACITY = 1 << 30;
     private int maxSize;
     private Double loadFactor;
     private Machine noIndexMachine = new Machine("no index", "no index", "no index");
-    Machine[] machine;
-    int numItems;
-    int index = 0;
+    private Machine[] machine;
+    private int numItems;
+    
 
     public QuadHashTable(int max, double loadFactor) {
         this.maxSize = max;
@@ -16,25 +15,26 @@ public class QuadHashTable {
     }
 
     public int add(Machine m) {
-        try {
-            int steps = 1;
+        double loadFactor = (1.0*numItems)/maxSize;
+        if(loadFactor < this.loadFactor){
+            int steps=1;
+            int pos2 =0;
             String code = m.getMachineCode();
-            int hashCode = hashFunction(code);
-            int pos = hashCode % maxSize;
+            int pos = hashFunction(code);
+            
             // Linear probing to handle collisions
-            while (machine[pos] != null) {// if pos = 15
-                pos = (pos + steps * steps) % maxSize; // add 1 to pos --- 16 mod 16 = 0 so the value would go into the
+            while (machine[pos2] != null) {
+                pos2 = (pos + steps*steps) % maxSize; 
                 steps++;
             }
-            machine[pos] = m;
+            machine[pos2] = m;
             numItems++;
-
-            return pos;
-        } catch (Exception e) {
-            //System.out.println("Error: " + e); // only un comment if you want to see what error happened
-            System.out.println("Amount of spaces full please try again later (end Program)");
-        }
-        return 0;
+            System.out.println(pos2);
+            return pos2;
+        }else{
+            System.out.println("Not enough space");//exceded load Factor typically would need to resize the array after this point
+            return 0;
+        }        
     }
 
     public int hashFunction(String key) {
@@ -51,15 +51,16 @@ public class QuadHashTable {
     public int getLocation(String key) {
         try{
             int steps =1;
-            int hashCode = hashFunction(key);
-            int pos = hashCode % maxSize;
+            int pos = hashFunction(key);
             if(machine[pos] == null){
                 while(machine[pos] == null){
                     pos++;
                 }
             }
+            
             while (!(machine[pos].getMachineCode().equals(key))) {
                 pos = (pos + steps*steps) % maxSize;
+                steps++;
             }
             return pos;
         }catch(Exception e){
