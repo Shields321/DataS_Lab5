@@ -1,7 +1,7 @@
 package datas_lab5;
 
 public class LinearHashTable {
-    private int maxSize;
+    private int maxSize; //used to set the max size of the array. 
     private Double loadFactor;
     private Machine noIndexMachine = new Machine("no index", "no index", "no index");
     Machine[] machine;
