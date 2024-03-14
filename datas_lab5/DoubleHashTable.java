@@ -24,7 +24,7 @@ public class DoubleHashTable {
             int pos = hashFunction(code); //Calling the first hash function. 
             int step = 0; //Counts the number of collisions that happen. 
             int pos2 = 0; //Stores the index. 
-            //double hashing to handle collisions
+            //double probing to handle collisions
             while (machine[pos2] != null) {
                 pos2 = (pos + (step*stepSize))  % maxSize;
                 step++;
