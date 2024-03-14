@@ -17,20 +17,20 @@ public class DoubleHashTable {
     public int add(Machine m) {
         double loadFactor = (1.0 * numItems) / maxSize; //This load factor is used to check if the array is near full.
         
-        if (loadFactor < this.loadFactor) {
+        if (loadFactor < this.loadFactor) { //Adds the element when the calculated load factor is smaller than the default load factor.
             
-            String code = m.getMachineCode();
-            int stepSize = hashFunction2(code);
-            int pos = hashFunction(code);
-            int step = 0;
-            int pos2 = 0;
-            // Linear probing to handle collisions
+            String code = m.getMachineCode(); //Getting the machine code of the key. 
+            int stepSize = hashFunction2(code); //Calling the second hash function.
+            int pos = hashFunction(code); //Calling the first hash function. 
+            int step = 0; //Counts the number of collisions that happen. 
+            int pos2 = 0; //Stores the index. 
+            //double hashing to handle collisions
             while (machine[pos2] != null) {
                 pos2 = (pos + (step*stepSize))  % maxSize;
                 step++;
             }
             machine[pos2] = m;
-            numItems++;
+            numItems++; //Increment the number of items in the array. 
             System.out.println(pos2);
             return pos2;
         } else {
@@ -51,7 +51,7 @@ public class DoubleHashTable {
     }
 
     public int hashFunction2(String key) {
-        int number = 3;
+        int number = 3; //Using the number 3 to make the output a third of the array size.
         int value = number - (hashFunction(key) % number);
         return value;
     }
