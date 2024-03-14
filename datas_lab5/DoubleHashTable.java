@@ -22,14 +22,17 @@ public class DoubleHashTable {
             String code = m.getMachineCode();
             int stepSize = hashFunction2(code);
             int pos = hashFunction(code);
+            int step = 0;
+            int pos2 = 0;
             // Linear probing to handle collisions
-            while (machine[pos] != null) {
-                pos = (pos + stepSize) % maxSize;
+            while (machine[pos2] != null) {
+                pos2 = (pos + (step*stepSize))  % maxSize;
+                step++;
             }
-            machine[pos] = m;
+            machine[pos2] = m;
             numItems++;
-            System.out.println(pos);
-            return pos;
+            System.out.println(pos2);
+            return pos2;
         } else {
             System.out.println("Not enough space");// exceded load Factor typically would need to resize the array after                                     
             return 0;
@@ -48,8 +51,9 @@ public class DoubleHashTable {
     }
 
     public int hashFunction2(String key) {
-        int prime = 7;
-        return prime - (hashFunction(key) % prime);
+        int number = 3;
+        int value = number - (hashFunction(key) % number);
+        return value;
     }
 
     public int getLocation(String key) {
