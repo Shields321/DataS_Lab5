@@ -17,10 +17,10 @@ public class QuadHashTable {
     public int add(Machine m) {
         double loadFactor = (1.0*numItems)/maxSize;  //This load factor is used to check if the array is near full.
         if(loadFactor < this.loadFactor){ //Adds the element when the calculated load factor is smaller than the default load factor.
-            int steps=1;
-            int pos2 =0;
-            String code = m.getMachineCode();
-            int pos = hashFunction(code);
+            int steps=0; //Counts the number of collisions that happen. 
+            int pos2 =0; //used to store the index.
+            String code = m.getMachineCode(); //getting the machine code of the machine.
+            int pos = hashFunction(code); //Hash code of the starting index.
             
             // Linear probing to handle collisions
             while (machine[pos2] != null) {
@@ -28,7 +28,7 @@ public class QuadHashTable {
                 steps++;
             }
             machine[pos2] = m;
-            numItems++;
+            numItems++; //increaments the number of items inside the array. 
             System.out.println(pos2);
             return pos2;
         }else{
