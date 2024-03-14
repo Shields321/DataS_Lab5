@@ -96,7 +96,7 @@ public class DoubleHashTable {
             return false;
         }
     }
-
+     //This is used to display all the elements in the array. 
     public String displayMachines() {
         StringBuilder builder = new StringBuilder("");
         for (int i = 0; i < maxSize; i++) {
