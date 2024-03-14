@@ -63,7 +63,7 @@ public class QuadHashTable {
                 steps++;
             }
             return pos;
-        }catch(Exception e){
+        }catch(Exception e){ 
             //System.out.println("Error: " + e); // only un comment if you want to see what error happened
             System.out.println("Key Not in Machine List");
             return -1;
@@ -83,7 +83,7 @@ public class QuadHashTable {
             int loc = getLocation(key); //gets the location of the key.
             machine[loc] = null; //make the machine at that index null.
             return true;
-        } catch (Exception e) { 
+        } catch (Exception e) {  //Triggers when the key is not in the array.
             System.out.println("No Value with the key: " + key);
             return false;   
         }
