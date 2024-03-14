@@ -22,7 +22,7 @@ public class QuadHashTable {
             String code = m.getMachineCode(); //getting the machine code of the machine.
             int pos = hashFunction(code); //Hash code of the starting index.
             
-            // Linear probing to handle collisions
+            //Quadratic probing to handle collisions
             while (machine[pos2] != null) {
                 pos2 = (pos + steps*steps) % maxSize; 
                 steps++;
