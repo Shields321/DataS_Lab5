@@ -49,7 +49,7 @@ public class LinearHashTable {
         try{ 
             int hashCode = hashFunction(key);
             int pos = hashCode % maxSize;  
-            if(machine[pos] == null){ //This is triggered if the starting position to look for the key is null.
+            if(machine[pos] == null){ //This is triggered if the hash code starting position to look for the key is null.
                 while(machine[pos] == null){
                     pos++;
                 }
