@@ -71,8 +71,8 @@ public class QuadHashTable {
     }
     
     public Machine retrieve(String key) {
-        int pos = getLocation(key);
-        if (pos == -1) {
+        int pos = getLocation(key); //Gets the index of the machine.
+        if (pos == -1) {//returns no index when key has no machine at that index.
             return noIndexMachine;
         }
         return machine[pos];
@@ -80,10 +80,10 @@ public class QuadHashTable {
 
     public boolean delete(String key) {
         try {
-            int loc = getLocation(key);
-            machine[loc] = null;
+            int loc = getLocation(key); //gets the location of the key.
+            machine[loc] = null; //make the machine at that index null.
             return true;
-        } catch (Exception e) {
+        } catch (Exception e) { 
             System.out.println("No Value with the key: " + key);
             return false;   
         }
