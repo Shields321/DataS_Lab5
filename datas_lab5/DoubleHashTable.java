@@ -61,7 +61,7 @@ public class DoubleHashTable {
             int stepSize = hashFunction2(key);
             int pos = hashFunction(key);
             
-            if (machine[pos] == null) { //This is triggered if the starting position to look for the key is null.
+            if (machine[pos] == null) { //This is triggered if the hash code starting position to look for the key is null.
                 while (machine[pos] == null) {
                     pos++;
                 }
