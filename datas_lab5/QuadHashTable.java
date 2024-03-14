@@ -52,18 +52,18 @@ public class QuadHashTable {
         try{
             int steps =1;
             int pos = hashFunction(key);
-            if(machine[pos] == null){
+            if(machine[pos] == null){ 
                 while(machine[pos] == null){
                     pos++;
                 }
             }
             
-            while (!(machine[pos].getMachineCode().equals(key))) {
-                pos = (pos + steps*steps) % maxSize;
+            while (!(machine[pos].getMachineCode().equals(key))) { //looks for the key
+                pos = (pos + steps*steps) % maxSize; 
                 steps++;
             }
             return pos;
-        }catch(Exception e){ 
+        }catch(Exception e){ //This catch is triggered when the key is not in the array.
             //System.out.println("Error: " + e); // only un comment if you want to see what error happened
             System.out.println("Key Not in Machine List");
             return -1;
