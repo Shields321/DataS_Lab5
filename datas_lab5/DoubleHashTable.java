@@ -79,8 +79,8 @@ public class DoubleHashTable {
     }
 
     public Machine retrieve(String key) {
-        int pos = getLocation(key);
-        if (pos == -1) {
+        int pos = getLocation(key);//Gets the index of the machine.
+        if (pos == -1) {//returns no index when key has no machine at that index. 
             return noIndexMachine;
         }
         return machine[pos];
