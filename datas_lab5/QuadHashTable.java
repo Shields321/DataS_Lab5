@@ -1,7 +1,7 @@
 package datas_lab5;
 
 public class QuadHashTable {
-    private int maxSize;
+    private int maxSize; //Used to set the max size of the array
     private Double loadFactor;
     private Machine noIndexMachine = new Machine("no index", "no index", "no index");
     private Machine[] machine;
@@ -10,13 +10,13 @@ public class QuadHashTable {
 
     public QuadHashTable(int max, double loadFactor) {
         this.maxSize = max;
-        this.loadFactor = loadFactor;
-        machine = new Machine[maxSize]; 
+        this.loadFactor = loadFactor; //This is the load factor set by the user.
+        machine = new Machine[maxSize]; //Creating the array that store the keys.  
     }
 
     public int add(Machine m) {
-        double loadFactor = (1.0*numItems)/maxSize;
-        if(loadFactor < this.loadFactor){
+        double loadFactor = (1.0*numItems)/maxSize;  //This load factor is used to check if the array is near full.
+        if(loadFactor < this.loadFactor){ //Adds the element when the calculated load factor is smaller than the default load factor.
             int steps=1;
             int pos2 =0;
             String code = m.getMachineCode();
@@ -52,7 +52,7 @@ public class QuadHashTable {
         try{
             int steps =1;
             int pos = hashFunction(key);
-            if(machine[pos] == null){ 
+            if(machine[pos] == null){ //This is triggered if the hash code starting position to look for the key is null.
                 while(machine[pos] == null){
                     pos++;
                 }
